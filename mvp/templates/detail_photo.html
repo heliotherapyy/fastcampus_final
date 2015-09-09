@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block content %}
+        <img src="{{ photo.image_file.url }}" width="400">
+
+    <a href="{% url "mvp.views.list_photo" %}" class="btn btn-default">글 목록</a>
+    <a href="{% url "mvp.views.delete_photo" photo.pk %}" class="btn btn-info">삭제</a>
+    <a href="{% url "mvp.views.create_comment" photo.pk %}" class="btn btn-success">새 댓글</a>
+
+            <ul>
+                {% for comment in photo.comment_set.all %}
+                    <li>
+                        {{ comment.content }}
+                        <a href="{% url "mvp.views.delete_comment" photo.pk %}">삭제</a>
+                    </li>
+                {% endfor %}
+            </ul>
+
+{% endblock %}
